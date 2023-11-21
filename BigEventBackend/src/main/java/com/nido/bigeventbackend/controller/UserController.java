@@ -65,10 +65,16 @@ public class UserController {
         /*Map<String, Object> map = JwtUtil.parseToken(token);
         String username = (String)map.get("username");*/
         Map<String, Object> map = ThreadLocalUtil.get();
-        String username = (String)map.get("username");
+        String username = (String) map.get("username");
 
         User user = userService.findByUsername(username);
         return Result.success(user);
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody @Validated User user) {
+        userService.update(user);
+        return Result.success();
     }
 
 }
