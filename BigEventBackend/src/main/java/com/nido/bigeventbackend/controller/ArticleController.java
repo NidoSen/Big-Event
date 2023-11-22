@@ -21,7 +21,7 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping
-    public Result add(@RequestBody @Validated Article article) {
+    public Result add(@RequestBody @Validated(Article.Add.class) Article article) {
         articleService.add(article);
         return Result.success();
     }
@@ -41,6 +41,12 @@ public class ArticleController {
     public Result<Article> detail(Integer id) {
         Article a = articleService.findById(id);
         return Result.success(a);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody @Validated(Article.Update.class) Article article) {
+        articleService.update(article);
+        return Result.success();
     }
 
 }

@@ -13,4 +13,7 @@ public interface ArticleService {
 
     // 根据id查询
     public Article findById(Integer id);
+
+    // 更新
+    public void update(Article article);
 }
