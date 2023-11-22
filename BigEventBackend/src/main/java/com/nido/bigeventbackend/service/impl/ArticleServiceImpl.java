@@ -55,4 +55,9 @@ public class ArticleServiceImpl implements ArticleService {
 
         return pb;
     }
+
+    @Override
+    public Article findById(Integer id) {
+        return articleMapper.findById(id);
+    }
 }

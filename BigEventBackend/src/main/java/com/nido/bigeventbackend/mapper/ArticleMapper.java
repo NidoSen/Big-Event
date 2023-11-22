@@ -3,6 +3,7 @@ package com.nido.bigeventbackend.mapper;
 import com.nido.bigeventbackend.pojo.Article;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface ArticleMapper {
     public void add(Article article);
 
     public List<Article> list(Integer userId, Integer categoryId, String state);
+
+    @Select("select * from article where id=#{id}")
+    public Article findById(Integer id);
 }
