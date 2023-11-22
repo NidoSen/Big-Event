@@ -1,10 +1,7 @@
 package com.nido.bigeventbackend.mapper;
 
 import com.nido.bigeventbackend.pojo.Category;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -28,4 +25,8 @@ public interface CategoryMapper {
     @Update("update category set category_name=#{categoryName}, category_alias=#{categoryAlias}, update_time=#{updateTime}" +
             "where id=#{id}")
     public void update(Category category);
+
+    // 根据id删除
+    @Delete("delete from category where id=#{id}")
+    public void deleteById(Integer id);
 }
