@@ -49,4 +49,9 @@ public class ArticleController {
         return Result.success();
     }
 
+    @DeleteMapping
+    public Result delete(Integer id) {
+        articleService.deleteById(id);
+        return Result.success();
+    }
 }
