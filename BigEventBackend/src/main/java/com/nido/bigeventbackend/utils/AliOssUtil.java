@@ -4,6 +4,9 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
+import com.aliyun.oss.common.auth.CredentialsProviderFactory;
+
+import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
 
@@ -15,16 +18,23 @@ public class AliOssUtil {
     // Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
     private static final String ENDPOINT = "https://oss-cn-hangzhou.aliyuncs.com";
     // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
-    // EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
-    private static final String ACCESS_KEY_ID = "LTAI5t7WSQBBFCk3fQmWWV3S";
-    private static final String ACCESS_KEY_SECRET = "jCfh3WXaAoBA98NQ6QiuKu7N9xOY5L";
+    private static EnvironmentVariableCredentialsProvider credentialsProvider;
+
+    static {
+        try {
+            credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
+        } catch (com.aliyuncs.exceptions.ClientException e) {
+            e.printStackTrace();
+        }
+    }
+
     // 填写Bucket名称，例如examplebucket。
     private static final String BUCKET_NAME = "nido-web-memory";
 
     public static String uploadFile(String objectName, InputStream in) throws Exception {
 
         // 创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        OSS ossClient = new OSSClientBuilder().build(ENDPOINT, credentialsProvider);
 
         String url = "";
 
