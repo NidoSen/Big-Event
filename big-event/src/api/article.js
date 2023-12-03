@@ -11,3 +11,8 @@ export const articleCategoryListService = () => {
     //在pinia中定义的响应式数据，都不需要加.value
     return request.get('/category')
 }
+
+//添加文章分类
+export const articleCategoryAddService = (categoryModel) => {
+    return request.post('/category', categoryModel)
+}
