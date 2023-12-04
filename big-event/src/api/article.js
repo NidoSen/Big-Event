@@ -33,3 +33,8 @@ export const articleListService = (params) => {
         params: params
     })
 }
+
+//添加文章
+export const articleAddService = (articleModel) => {
+    return request.post('/article', articleModel)
+}
